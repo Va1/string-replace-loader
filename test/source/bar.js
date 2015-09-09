@@ -1,3 +1,3 @@
-var value = 'baz';
+var value = 'bar';
 
 module.exports = value;

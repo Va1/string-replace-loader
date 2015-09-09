@@ -10,7 +10,10 @@
     "test": "mocha"
   },
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "loader-utils": "^0.2.11",
+    "lodash": "^3.10.1"
+  },
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.3.2",
