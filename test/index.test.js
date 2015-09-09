@@ -9,7 +9,6 @@ var outputFileName = 'build.js';
 var outputFilePath = path.join(outputDirPath, outputFileName);
 
 describe('Webpack replace loader ...', function () {
-
   it('should replace with string subject', function (done) {
     webpack(
       {
@@ -160,5 +159,4 @@ describe('Webpack replace loader ...', function () {
       }
     );
   });
-
 });
