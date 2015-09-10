@@ -1,18 +1,14 @@
-var _ = require('lodash');
 var utils = require('loader-utils');
 
 module.exports = function (source) {
   var query = utils.parseQuery(this.query);
-  var subject = query['subject'];
-  var replacement = query['replacement'];
-  var flags = query['flags'];
 
-  if (_.isString(subject) && _.isString(replacement)) {
-    if (_.isString(flags)) {
-      subject = new RegExp(subject, flags);
+  if (typeof query.subject !== 'undefined' && typeof query.replacement !== 'undefined') {
+    if (typeof query.flags !== 'undefined') {
+      query.subject = new RegExp(query.subject, query.flags);
     }
 
-    source = source.replace(subject, replacement);
+    source = source.replace(query.subject, query.replacement);
   }
 
   return source;
