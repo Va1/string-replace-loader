@@ -1,10 +1,12 @@
 {
   "name": "replace-loader",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
-    "webpack-loader"
+    "loader",
+    "webpack-loader",
+    "replace"
   ],
   "scripts": {
     "test": "mocha"

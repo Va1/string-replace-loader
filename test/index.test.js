@@ -9,7 +9,7 @@ var outputFileName = 'build.js';
 var outputFilePath = path.join(outputDirPath, outputFileName);
 
 describe('Webpack replace loader ...', function () {
-  it('should replace with string subject', function (done) {
+  it('should replace with string search', function (done) {
     webpack(
       {
         entry: entryFilePath,
@@ -23,8 +23,8 @@ describe('Webpack replace loader ...', function () {
               test: /\.js$/,
               loader: '__this',
               query: {
-                subject: 'var value',
-                replacement: 'var a'
+                search: 'var value',
+                replace: 'var a'
               }
             }
           ]
@@ -44,7 +44,7 @@ describe('Webpack replace loader ...', function () {
     );
   });
 
-  it('should replace with pattern subject', function (done) {
+  it('should replace with pattern search', function (done) {
     webpack(
       {
         entry: entryFilePath,
@@ -58,8 +58,8 @@ describe('Webpack replace loader ...', function () {
               test: /\.js$/,
               loader: '__this',
               query: {
-                subject: 'var VALUE = \'\.*\'',
-                replacement: 'var a = \'\'',
+                search: 'var VALUE = \'\.*\'',
+                replace: 'var a = \'\'',
                 flags: 'i'
               }
             }
@@ -94,16 +94,16 @@ describe('Webpack replace loader ...', function () {
               test: /\.js$/,
               loader: '__this',
               query: {
-                subject: 'var value',
-                replacement: 'var a'
+                search: 'var value',
+                replace: 'var a'
               }
             },
             {
               test: /bar\.js$/,
               loader: '__this',
               query: {
-                subject: 'var value',
-                replacement: 'var bar'
+                search: 'var value',
+                replace: 'var bar'
               }
             }
           ]
@@ -137,8 +137,8 @@ describe('Webpack replace loader ...', function () {
             {
               test: /\.js$/,
               loaders: [
-                '__this?subject=var value&replacement=var a',
-                '__this?subject=module.exports = value&replacement=module.exports = a'
+                '__this?search=var value&replace=var a',
+                '__this?search=module.exports = value&replace=module.exports = a'
               ]
             }
           ]
