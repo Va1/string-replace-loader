@@ -2,6 +2,6 @@
 .DS_Store
 *.log
 *.swp
-node_modules/**/*
-!node_modules/__this-loader
+node_modules/*
+!node_modules/__this-loader/
 test/build/
