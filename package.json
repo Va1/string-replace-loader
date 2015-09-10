@@ -1,6 +1,6 @@
 {
   "name": "string-replace-loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
