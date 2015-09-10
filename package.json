@@ -1,12 +1,14 @@
 {
-  "name": "replace-loader",
+  "name": "string-replace-loader",
   "version": "0.1.0",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
     "loader",
     "webpack-loader",
-    "replace"
+    "replace",
+    "string-replace",
+    "regex-replace"
   ],
   "scripts": {
     "test": "mocha"
@@ -25,9 +27,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Va1/replace-loader.git"
+    "url": "https://github.com/Va1/string-replace-loader.git"
   },
-  "homepage": "https://github.com/Va1/replace-loader",
+  "homepage": "https://github.com/Va1/string-replace-loader",
   "author": "Valentyn Barmashyn <valpreacher@gmail.com>",
   "license": "MIT",
   "private": false
