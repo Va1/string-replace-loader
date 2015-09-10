@@ -1,6 +1,7 @@
 var utils = require('loader-utils');
 
 module.exports = function (source) {
+  this.cacheable();
   var query = utils.parseQuery(this.query);
 
   if (typeof query.search !== 'undefined' && typeof query.replace !== 'undefined') {
