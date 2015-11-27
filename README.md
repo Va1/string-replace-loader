@@ -5,7 +5,7 @@ Perform replacements (plain and regular expression) in the contents loaded by th
 ## Install:
 
 ```bash
-$ npm install --save-dev replace-loader
+$ npm install --save-dev string-replace-loader
 ```
 
 ## Usage:
