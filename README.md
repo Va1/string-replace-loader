@@ -49,9 +49,8 @@ module.exports = {
           test: /fileInWhichJQueryIsUndefined\.js$/,
           loader: 'string-replace',
           query: {
-            search: 'jquery',
-            replace: 'window.$',
-            flags: 'i'
+            search: /jquery/i,
+            replace: 'window.$'
           }
         }
       ]
@@ -72,7 +71,7 @@ module.exports = {
           test: /\.js$/,
           loader: 'string-replace',
           query: {
-            replace: [
+            multiple: [
                {search: 'framework', replace: 'flamewar'},
                {search: 'ants', replace: 'super ants'},
             ]
