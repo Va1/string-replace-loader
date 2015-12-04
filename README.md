@@ -69,11 +69,12 @@ module.exports = {
     module: {
       loaders: [
         {
-          test: /fileInWhichJQueryIsUndefined\.js$/,
+          test: /\.js$/,
           loader: 'string-replace',
           query: {
             replace: [
-               {search: 'AAAAA', replace: 'BBBBB'},
+               {search: 'framework', replace: 'flamewar'},
+               {search: 'ants', replace: 'super ants'},
             ]
           }
         }
