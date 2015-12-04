@@ -18,9 +18,9 @@ module.exports = function(source) {
   if (typeof query.search !== 'undefined' && typeof query.replace !== 'undefined') {
     if (typeof query.flags !== 'undefined') {
       query.search = new RegExp(query.search, query.flags);
-
-      return source.replace(query.search, query.replace);
     }
+
+    return source.replace(query.search, query.replace);
   }
 
   return source;
