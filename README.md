@@ -59,6 +59,29 @@ module.exports = {
 }
 ```
 
+### Array replacement:
+
+In your `webpack.config.js`:
+
+```javascript
+module.exports = {
+    // ...
+    module: {
+      loaders: [
+        {
+          test: /fileInWhichJQueryIsUndefined\.js$/,
+          loader: 'string-replace',
+          query: {
+            replace: [
+               {search: 'AAAAA', replace: 'BBBBB'},
+            ]
+          }
+        }
+      ]
+    }
+}
+```
+
 ## Contributing:
 
 Feel free to open issues to propose stuff and participate. Pull requests are also welcome.
