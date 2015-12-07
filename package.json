@@ -1,6 +1,6 @@
 {
   "name": "string-replace-loader",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
@@ -15,7 +15,8 @@
   },
   "main": "index.js",
   "dependencies": {
-    "loader-utils": "^0.2.11"
+    "loader-utils": "^0.2.11",
+    "lodash": "^3.10.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",

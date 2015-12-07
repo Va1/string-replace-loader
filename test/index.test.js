@@ -124,7 +124,52 @@ describe('Webpack replace loader ...', function () {
     );
   });
 
-  it('should replace using string query', function (done) {
+  it('should replace using multiple queries', function (done) {
+    webpack(
+      {
+        entry: entryFilePath,
+        output: {
+          path: outputDirPath,
+          filename: outputFileName
+        },
+        module: {
+          loaders: [
+            {
+              test: /\.js$/,
+              loader: '__this',
+              query: {
+                multiple: [
+                  {
+                    search: 'var value',
+                    replace: 'var a'
+                  },
+                  {
+                    search: 'module.exports = value',
+                    replace: 'module.exports = a'
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      function (error, stats) {
+        expect(error).to.equal(null);
+
+        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
+          expect(error).to.equal(null);
+          expect(contents).to.be.a('string');
+          expect(contents.indexOf('var value')).to.equal(-1);
+          expect(contents.indexOf('var a')).to.not.equal(-1);
+          expect(contents.indexOf('module.exports = value')).to.equal(-1);
+          expect(contents.indexOf('module.exports = a')).to.not.equal(-1);
+          done();
+        });
+      }
+    );
+  });
+
+  it('should replace using multiple queries as strings', function (done) {
     webpack(
       {
         entry: entryFilePath,

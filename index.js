@@ -1,28 +1,30 @@
+var _ = require('lodash');
 var utils = require('loader-utils');
 
-function processQuery(source, option) {
-  if (typeof option.search !== 'undefined' && typeof option.replace !== 'undefined') {
-    return source.split(option.search).join(option.replace);
+function processQuery(source, query) {
+  if (!_.isUndefined(query.search) && !_.isUndefined(query.replace)) {
+    if (!_.isUndefined(query.flags)) {
+      query.search = new RegExp(query.search, query.flags);
+    }
+
+    return source.replace(query.search, query.replace);
   }
 
   return source;
 }
 
-module.exports = function(source) {
+module.exports = function (source) {
   this.cacheable();
 
   var query = utils.parseQuery(this.query);
 
-  if (Array.isArray(query.multiple)) {
-    var length = query.multiple.length;
-
-    for (var i = 0; i < length; i++) {
-      var option = query.multiple[i];
-      source = processQuery(source, option);
-    }
-
-    return source;
+  if (_.isArray(query.multiple)) {
+    query.multiple.forEach(function (subquery) {
+      source = processQuery(source, subquery);
+    });
+  } else {
+    source = processQuery(source, query);
   }
 
-  return processQuery(source, query);
+  return source;
 };

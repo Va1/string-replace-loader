@@ -16,23 +16,23 @@ In your `webpack.config.js`:
 
 ```javascript
 module.exports = {
-    // ...
-    module: {
-      loaders: [
-        {
-          test: /fileInWhichJQueryIsUndefined\.js$/,
-          loader: 'string-replace',
-          query: {
-            search: 'jQuery',
-            replace: 'window.$'
-          }
+  // ...
+  module: {
+    loaders: [
+      {
+        test: /fileInWhichJQueryIsUndefined\.js$/,
+        loader: 'string-replace',
+        query: {
+          search: 'jQuery',
+          replace: 'window.$'
         }
-      ]
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Regex replacement:
+### RegEx replacement:
 
 To achieve regular expression replacement you should specify the `flags` query param
 (as an empty string if you do not want any flags). In this case, `search` and `flags` are being
@@ -42,43 +42,46 @@ In your `webpack.config.js`:
 
 ```javascript
 module.exports = {
-    // ...
-    module: {
-      loaders: [
-        {
-          test: /fileInWhichJQueryIsUndefined\.js$/,
-          loader: 'string-replace',
-          query: {
-            search: /jquery/i,
-            replace: 'window.$'
-          }
+  // ...
+  module: {
+    loaders: [
+      {
+        test: /fileInWhichJQueryIsUndefined\.js$/,
+        loader: 'string-replace',
+        query: {
+          search: 'jquery',
+          replace: 'window.$',
+          flags: 'i'
         }
-      ]
-    }
+      }
+    ]
+  }
 }
 ```
 
-### Array replacement:
+### Multiple replacement:
+
+Also, you can pass an array of search-replace pairs this way:
 
 In your `webpack.config.js`:
 
 ```javascript
 module.exports = {
-    // ...
-    module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          loader: 'string-replace',
-          query: {
-            multiple: [
-               {search: 'framework', replace: 'flamewar'},
-               {search: 'ants', replace: 'super ants'},
-            ]
-          }
+  // ...
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'string-replace',
+        query: {
+          multiple: [
+             { search: 'jQuery', replace: 'window.$' },
+             { search: '_', replace: 'window.lodash' }
+          ]
         }
-      ]
-    }
+      }
+    ]
+  }
 }
 ```
 
