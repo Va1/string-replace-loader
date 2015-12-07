@@ -49,9 +49,32 @@ module.exports = {
           test: /fileInWhichJQueryIsUndefined\.js$/,
           loader: 'string-replace',
           query: {
-            search: 'jquery',
-            replace: 'window.$',
-            flags: 'i'
+            search: /jquery/i,
+            replace: 'window.$'
+          }
+        }
+      ]
+    }
+}
+```
+
+### Array replacement:
+
+In your `webpack.config.js`:
+
+```javascript
+module.exports = {
+    // ...
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'string-replace',
+          query: {
+            multiple: [
+               {search: 'framework', replace: 'flamewar'},
+               {search: 'ants', replace: 'super ants'},
+            ]
           }
         }
       ]
