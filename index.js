@@ -7,7 +7,7 @@ function processQuery(source, query) {
       query.search = new RegExp(query.search, query.flags);
     }
 
-    return source.replace(query.search, query.replace);
+    source = source.replace(query.search, query.replace);
   }
 
   return source;
