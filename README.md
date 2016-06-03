@@ -10,6 +10,8 @@ $ npm install --save-dev string-replace-loader
 
 ## Usage:
 
+In general, loader allows to perform replacements in a way [String.prototype.replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) does (loader uses it internally). For instance, it means that if you want to replace all occurences, you should use RegExp in `query.search` with `g` flag in `query.flags`, etc.
+
 ### Plain replacement:
 
 In your `webpack.config.js`:
