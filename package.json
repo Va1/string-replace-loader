@@ -1,6 +1,6 @@
 {
   "name": "string-replace-loader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
@@ -24,7 +24,7 @@
     "webpack": "1.x.x || 2.x.x"
   },
   "peerDependencies": {
-    "webpack": "1.x.x || 2.x.x"
+    "webpack": "*"
   },
   "repository": {
     "type": "git",
