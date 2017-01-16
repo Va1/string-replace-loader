@@ -1,9 +1,8 @@
-var _ = require('lodash');
 var utils = require('loader-utils');
 
 function processQuery(source, query) {
-  if (!_.isUndefined(query.search) && !_.isUndefined(query.replace)) {
-    if (!_.isUndefined(query.flags)) {
+  if (query.search !== undefined && query.replace !== undefined) {
+    if (query.flags !== undefined) {
       query.search = new RegExp(query.search, query.flags);
     }
 
@@ -18,7 +17,7 @@ module.exports = function (source) {
 
   var query = utils.parseQuery(this.query);
 
-  if (_.isArray(query.multiple)) {
+  if (Array.isArray(query.multiple)) {
     query.multiple.forEach(function (subquery) {
       source = processQuery(source, subquery);
     });
