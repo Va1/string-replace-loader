@@ -3,7 +3,7 @@ var utils = require('loader-utils');
 
 function processQuery(source, query) {
   if (!_.isUndefined(query.search) && !_.isUndefined(query.replace)) {
-    if (!_.isUndefined(query.flags)) {
+    if (!_.isUndefined(query.flags) && !_.isRegExp(query.search)) {
       query.search = new RegExp(query.search, query.flags);
     }
 
