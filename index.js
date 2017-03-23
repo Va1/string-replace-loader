@@ -13,7 +13,7 @@ function processQuery(source, query) {
   return source;
 }
 
-module.exports = function (source) {
+module.exports = function (source, map) {
   this.cacheable();
 
   var query = utils.parseQuery(this.query);
@@ -26,5 +26,5 @@ module.exports = function (source) {
     source = processQuery(source, query);
   }
 
-  return source;
+  this.callback(source, map);
 };
