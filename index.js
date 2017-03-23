@@ -15,6 +15,7 @@ function processQuery(source, query) {
 
 module.exports = function (source, map) {
   this.cacheable();
+  this.async()
 
   var query = utils.parseQuery(this.query);
 
