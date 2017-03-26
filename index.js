@@ -1,13 +1,13 @@
 var _ = require('lodash');
-var utils = require('loader-utils');
+var loaderUtils = require('loader-utils');
 
-function processQuery(source, query) {
-  if (!_.isUndefined(query.search) && !_.isUndefined(query.replace)) {
-    if (!_.isUndefined(query.flags)) {
-      query.search = new RegExp(query.search, query.flags);
+function processOptions(source, options) {
+  if (!_.isUndefined(options.search) && !_.isUndefined(options.replace)) {
+    if (!_.isUndefined(options.flags)) {
+      options.search = new RegExp(options.search, options.flags);
     }
 
-    source = source.replace(query.search, query.replace);
+    source = source.replace(options.search, options.replace);
   }
 
   return source;
@@ -16,14 +16,14 @@ function processQuery(source, query) {
 module.exports = function (source) {
   this.cacheable();
 
-  var query = utils.parseQuery(this.query);
+  var options = loaderUtils.getOptions(this);
 
-  if (_.isArray(query.multiple)) {
-    query.multiple.forEach(function (subquery) {
-      source = processQuery(source, subquery);
+  if (_.isArray(options.multiple)) {
+    options.multiple.forEach(function (suboptions) {
+      source = processOptions(source, suboptions);
     });
   } else {
-    source = processQuery(source, query);
+    source = processOptions(source, options);
   }
 
   return source;
