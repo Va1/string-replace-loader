@@ -21,7 +21,7 @@ describe('Webpack replace loader ...', function () {
           loaders: [
             {
               test: /\.js$/,
-              loader: '__this',
+              loader: '__this-loader',
               query: {
                 search: 'var value',
                 replace: 'var a'
@@ -56,7 +56,7 @@ describe('Webpack replace loader ...', function () {
           loaders: [
             {
               test: /\.js$/,
-              loader: '__this',
+              loader: '__this-loader',
               query: {
                 search: 'var VALUE = \'\.*\'',
                 replace: 'var a = \'\'',
@@ -92,7 +92,7 @@ describe('Webpack replace loader ...', function () {
           loaders: [
             {
               test: /\.js$/,
-              loader: '__this',
+              loader: '__this-loader',
               query: {
                 search: 'var value',
                 replace: 'var a'
@@ -100,7 +100,7 @@ describe('Webpack replace loader ...', function () {
             },
             {
               test: /bar\.js$/,
-              loader: '__this',
+              loader: '__this-loader',
               query: {
                 search: 'var value',
                 replace: 'var bar'
@@ -136,7 +136,7 @@ describe('Webpack replace loader ...', function () {
           loaders: [
             {
               test: /\.js$/,
-              loader: '__this',
+              loader: '__this-loader',
               query: {
                 multiple: [
                   {
@@ -182,8 +182,8 @@ describe('Webpack replace loader ...', function () {
             {
               test: /\.js$/,
               loaders: [
-                '__this?search=var value&replace=var a',
-                '__this?search=module.exports = value&replace=module.exports = a'
+                '__this-loader?search=var value&replace=var a',
+                '__this-loader?search=module.exports = value&replace=module.exports = a'
               ]
             }
           ]
