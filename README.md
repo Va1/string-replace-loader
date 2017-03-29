@@ -87,6 +87,31 @@ module.exports = {
 }
 ```
 
+### Strict mode replacement:
+
+You can set strict mode to ensure that the replacement was done:
+
+In your `webpack.config.js`:
+
+```javascript
+module.exports = {
+  // ...
+  module: {
+    loaders: [
+      {
+        test: /fileInWhichJQueryIsUndefined\.js$/,
+        loader: 'string-replace',
+        query: {
+          search: 'jQuery',
+          replace: 'window.$',
+          strict: true
+        }
+      }
+    ]
+  }
+}
+```
+
 ## Contributing:
 
 Feel free to open issues to propose stuff and participate. Pull requests are also welcome.
