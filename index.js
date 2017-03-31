@@ -7,10 +7,21 @@ function processOptions(source, options) {
       options.search = new RegExp(options.search, options.flags);
     }
 
-    source = source.replace(options.search, options.replace);
+    newSource = source.replace(options.search, options.replace);
+    if (options.strict === true && newSource === source) {
+      throw new Error('Cannot replace ' + options.search + ' → ' + options.replace);
+    }
   }
 
-  return source;
+  if (options.strict === true && _.isUndefined(options.search)) {
+    throw new Error('Cannot replace: search option is not defined → ' + JSON.stringify(options));
+  }
+
+  if (options.strict === true && _.isUndefined(options.replace)) {
+    throw new Error('Cannot replace: replace option is not defined → ' + JSON.stringify(options));
+  }
+
+  return newSource;
 }
 
 module.exports = function (source) {
@@ -20,6 +31,7 @@ module.exports = function (source) {
 
   if (_.isArray(options.multiple)) {
     options.multiple.forEach(function (suboptions) {
+      suboptions.strict = !_.isUndefined(suboptions.strict) ? suboptions.strict : options.strict;
       source = processOptions(source, suboptions);
     });
   } else {
