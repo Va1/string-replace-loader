@@ -7,18 +7,12 @@ function processOptions(source, options) {
       options.search = new RegExp(options.search, options.flags);
     }
 
-    newSource = source.replace(options.search, options.replace);
-    if (options.strict === true && newSource === source) {
+    var newSource = source.replace(options.search, options.replace);
+    if (options.strict && (newSource === source)) {
       throw new Error('Cannot replace ' + options.search + ' → ' + options.replace);
     }
-  }
-
-  if (options.strict === true && _.isUndefined(options.search)) {
-    throw new Error('Cannot replace: search option is not defined → ' + JSON.stringify(options));
-  }
-
-  if (options.strict === true && _.isUndefined(options.replace)) {
-    throw new Error('Cannot replace: replace option is not defined → ' + JSON.stringify(options));
+  } else if (options.strict) {
+    throw new Error('Cannot replace: undefined search or/and option(s) → ' + JSON.stringify(options));
   }
 
   return newSource;
@@ -31,7 +25,7 @@ module.exports = function (source) {
 
   if (_.isArray(options.multiple)) {
     options.multiple.forEach(function (suboptions) {
-      suboptions.strict = !_.isUndefined(suboptions.strict) ? suboptions.strict : options.strict;
+      suboptions.strict = (!_.isUndefined(suboptions.strict) ? suboptions.strict : options.strict);
       source = processOptions(source, suboptions);
     });
   } else {

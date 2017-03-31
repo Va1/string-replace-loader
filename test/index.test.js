@@ -187,29 +187,6 @@ describe('Webpack replace loader ...', function () {
     );
   });
 
-  it('should not throw error when cannot replace in single mode and strict is object', function (done) {
-    webpack(getTestWebPackConfig(
-      {
-        test: /\.js$/,
-        loader: '__this-loader',
-        query: {
-          search: 'unexisting value',
-          replace: 'var a',
-          strict: 'some string'
-        }
-      }),
-      function (error, stats) {
-        expect(error).to.equal(null);
-
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).is.not.include('Cannot replace unexisting value → var a');
-          done();
-        });
-      }
-    );
-  });
-
   it('should not throw error when cannot replace in multiple mode', function (done) {
     webpack(getTestWebPackConfig(
       {
@@ -311,7 +288,7 @@ describe('Webpack replace loader ...', function () {
         fs.readFile(outputFilePath, 'utf8', function (error, contents) {
           expect(error).to.equal(null);
           expect(contents).to.be.a('string');
-          expect(contents).is.include('Cannot replace: search option is not defined');
+          expect(contents).is.include('Cannot replace: undefined search or/and option(s)');
           done();
         });
       }
