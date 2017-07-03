@@ -18,7 +18,7 @@ function processOptions(source, options) {
   return newSource;
 }
 
-module.exports = function (source) {
+module.exports = function (source, map) {
   this.cacheable();
 
   var options = loaderUtils.getOptions(this);
@@ -32,5 +32,5 @@ module.exports = function (source) {
     source = processOptions(source, options);
   }
 
-  return source;
+  this.callback(null, source, map);
 };
