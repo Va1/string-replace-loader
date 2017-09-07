@@ -23,7 +23,7 @@ module.exports = {
     loaders: [
       {
         test: /fileInWhichJQueryIsUndefined\.js$/,
-        loader: 'string-replace',
+        loader: 'string-replace-loader',
         query: {
           search: 'jQuery',
           replace: 'window.$'
@@ -49,7 +49,7 @@ module.exports = {
     loaders: [
       {
         test: /fileInWhichJQueryIsUndefined\.js$/,
-        loader: 'string-replace',
+        loader: 'string-replace-loader',
         query: {
           search: 'jquery',
           replace: 'window.$',
@@ -74,7 +74,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'string-replace',
+        loader: 'string-replace-loader',
         query: {
           multiple: [
              { search: 'jQuery', replace: 'window.$' },
@@ -100,7 +100,7 @@ module.exports = {
     loaders: [
       {
         test: /fileInWhichJQueryIsUndefined\.js$/,
-        loader: 'string-replace',
+        loader: 'string-replace-loader',
         query: {
           search: 'jQuery',
           replace: 'window.$',
