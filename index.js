@@ -3,11 +3,13 @@ var loaderUtils = require('loader-utils');
 
 function processOptions(source, options) {
   if (!_.isUndefined(options.search) && !_.isUndefined(options.replace)) {
+    var search = options.search;
+
     if (!_.isUndefined(options.flags)) {
-      options.search = new RegExp(options.search, options.flags);
+      search = new RegExp(options.search, options.flags);
     }
 
-    var newSource = source.replace(options.search, options.replace);
+    var newSource = source.replace(search, options.replace);
     if (options.strict && (newSource === source)) {
       throw new Error('Cannot replace ' + options.search + ' → ' + options.replace);
     }
