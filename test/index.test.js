@@ -8,16 +8,17 @@ const outputDirPath = path.join(__dirname, 'build')
 const outputFileName = 'build.js'
 const outputFilePath = path.join(outputDirPath, outputFileName)
 
-function getTestWebPackConfig(loader) {
+function getTestWebPackConfig(loaderConfig) {
   return {
+    mode: 'development',
     entry: entryFilePath,
     output: {
       path: outputDirPath,
       filename: outputFileName
     },
     module: {
-      loaders: [
-        loader
+      rules: [
+        loaderConfig
       ]
     }
   }
@@ -29,7 +30,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'var value',
           replace: 'var a'
         }
@@ -53,7 +54,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'var VALUE = \'\.*\'',
           replace: 'var a = \'\'',
           flags: 'i'
@@ -78,7 +79,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'var value',
           replace: 'var a'
         }
@@ -86,7 +87,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /bar\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'var value',
           replace: 'var bar'
         }
@@ -111,7 +112,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           multiple: [
             {
               search: 'var value',
@@ -170,7 +171,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'nonexistent value',
           replace: 'var a'
         }
@@ -192,7 +193,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           multiple: [
             {
               search: 'nonexistent value',
@@ -219,7 +220,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           search: 'nonexistent value',
           replace: 'var a',
           strict: true
@@ -243,7 +244,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           multiple: [
             {
               search: 'nonexistent value',
@@ -271,7 +272,7 @@ describe('Webpack replace loader ...', () => {
       {
         test: /\.js$/,
         loader: '__this-loader',
-        query: {
+        options: {
           multiple: [
             {
               replace: 'var a',
