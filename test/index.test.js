@@ -1,12 +1,12 @@
-var path = require('path');
-var fs = require('fs');
-var expect = require('chai').expect;
-var webpack = require('webpack');
+const path = require('path')
+const fs = require('fs')
+const { expect } = require('chai')
+const webpack = require('webpack')
 
-var entryFilePath = path.join(__dirname, 'source/entry.js');
-var outputDirPath = path.join(__dirname, 'build');
-var outputFileName = 'build.js';
-var outputFilePath = path.join(outputDirPath, outputFileName);
+const entryFilePath = path.join(__dirname, 'source/entry.js')
+const outputDirPath = path.join(__dirname, 'build')
+const outputFileName = 'build.js'
+const outputFilePath = path.join(outputDirPath, outputFileName)
 
 function getTestWebPackConfig(loader) {
   return {
@@ -23,8 +23,8 @@ function getTestWebPackConfig(loader) {
   }
 }
 
-describe('Webpack replace loader ...', function () {
-  it('should replace with string search', function (done) {
+describe('Webpack replace loader ...', () => {
+  it('should replace with string search', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -34,21 +34,21 @@ describe('Webpack replace loader ...', function () {
           replace: 'var a'
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('var value');
-          expect(contents).is.include('var a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should replace with pattern search', function (done) {
+  it('should replace with pattern search', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -59,21 +59,21 @@ describe('Webpack replace loader ...', function () {
           flags: 'i'
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('var value');
-          expect(contents).is.include('var a = \'\'');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a = \'\'')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should replace scoped', function (done) {
+  it('should replace scoped', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -91,22 +91,22 @@ describe('Webpack replace loader ...', function () {
           replace: 'var bar'
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('var value');
-          expect(contents).is.include('var a');
-          expect(contents).is.include('var bar');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a')
+          expect(contents).to.include('var bar')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should replace using multiple queries', function (done) {
+  it('should replace using multiple queries', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -124,23 +124,23 @@ describe('Webpack replace loader ...', function () {
           ]
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('var value');
-          expect(contents).is.include('var a');
-          expect(contents).is.not.include('module.exports = value');
-          expect(contents).is.include('module.exports = a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a')
+          expect(contents).to.not.include('module.exports = value')
+          expect(contents).to.include('module.exports = a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should replace using multiple queries as strings', function (done) {
+  it('should replace using multiple queries as strings', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -149,45 +149,45 @@ describe('Webpack replace loader ...', function () {
           '__this-loader?search=module.exports = value&replace=module.exports = a'
         ]
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('var value');
-          expect(contents).is.include('var a');
-          expect(contents).is.not.include('module.exports = value');
-          expect(contents).is.include('module.exports = a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a')
+          expect(contents).to.not.include('module.exports = value')
+          expect(contents).to.include('module.exports = a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should not throw error when cannot replace in single mode', function (done) {
+  it('should not throw error when cannot replace in single mode', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
         loader: '__this-loader',
         query: {
-          search: 'unexisting value',
+          search: 'nonexistent value',
           replace: 'var a'
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).is.not.include('Cannot replace unexisting value → var a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.not.include('Replace failed (strict mode) : nonexistent value → var a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should not throw error when cannot replace in multiple mode', function (done) {
+  it('should not throw error when cannot replace in multiple mode', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -195,52 +195,50 @@ describe('Webpack replace loader ...', function () {
         query: {
           multiple: [
             {
-              search: 'unexisting value',
-              replace: 'var a',
-              strict: false
+              search: 'nonexistent value',
+              replace: 'var a'
             }
-          ],
-          strict: true
+          ]
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.not.include('Cannot replace unexisting value → var a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('Replace failed (strict mode) : nonexistent value → var a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should throw error when cannot replace in single strict mode', function (done) {
+  it('should throw error when cannot replace in single strict mode', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
         loader: '__this-loader',
         query: {
-          search: 'unexisting value',
+          search: 'nonexistent value',
           replace: 'var a',
           strict: true
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.include('Cannot replace unexisting value → var a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.include('Replace failed (strict mode) : nonexistent value → var a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should throw error when cannot replace in multiple strict mode', function (done) {
+  it('should throw error when can not replace in multiple strict mode', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -248,27 +246,27 @@ describe('Webpack replace loader ...', function () {
         query: {
           multiple: [
             {
-              search: 'unexisting value',
-              replace: 'var a'
+              search: 'nonexistent value',
+              replace: 'var a',
+              strict: true
             }
-          ],
-          strict: true
+          ]
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.include('Cannot replace unexisting value → var a');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.include('Replace failed (strict mode) : nonexistent value → var a')
+          done()
+        })
       }
-    );
-  });
+    )
+  })
 
-  it('should throw error when search is not defined in strict mode', function (done) {
+  it('should throw error when search is not defined in strict mode', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -276,22 +274,22 @@ describe('Webpack replace loader ...', function () {
         query: {
           multiple: [
             {
-              replace: 'var a'
+              replace: 'var a',
+              strict: true
             }
-          ],
-          strict: true
+          ]
         }
       }),
-      function (error, stats) {
-        expect(error).to.equal(null);
+      (error, stats) => {
+        expect(error).to.equal(null)
 
-        fs.readFile(outputFilePath, 'utf8', function (error, contents) {
-          expect(error).to.equal(null);
-          expect(contents).to.be.a('string');
-          expect(contents).is.include('Cannot replace: undefined search or/and option(s)');
-          done();
-        });
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.include('Replace failed (strict mode) : options.search and options.replace are required')
+          done()
+        })
       }
-    );
-  });
-});
+    )
+  })
+})
