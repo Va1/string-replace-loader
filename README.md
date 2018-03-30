@@ -94,6 +94,33 @@ module.exports = {
 }
 ```
 
+### Replacement with callback
+
+You can specify a callback function to have dynamic replacement values.
+
+In your `webpack.config.js`:
+
+```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: '^Hello, (.*)!$',
+          replace: function(match, p1, offset, string){
+            return 'Bonjour, ' + p1.toUpperCase() + '!!!';
+          },
+          flags: 'gi'
+        }
+      }
+    ]
+  }
+}
+``` 
+
 ### Strict mode replacement:
 
 You can enable strict mode to ensure that the replacement was performed.
