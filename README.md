@@ -9,7 +9,7 @@ $ npm install --save-dev string-replace-loader
 ```
 
 With release of 2.0.0 the loader is expected to be used in Node v4+ environment.
-Support for Node v3 and lower was dropped, but you can install and use the loader version of 1.3.0 in older environments. 
+Support for Node v3 and lower was dropped, but you can install and use the loader version of 1.3.0 in older environments.
 
 ## Usage:
 
@@ -113,6 +113,33 @@ module.exports = {
           search: 'jQuery',
           replace: 'window.$',
           strict: true
+        }
+      }
+    ]
+  }
+}
+```
+
+### Callback replacement:
+
+You can specify a callback function to dynamically replace a match.
+
+In your `webpack.config.js`:
+
+ ```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: '^Hello, (.*)!$',
+          replace: function(match, p1, offset, string){
+            return 'Bonjour, ' + p1.toUpperCase() + '!!!';
+          },
+          flags: 'gi'
         }
       }
     ]

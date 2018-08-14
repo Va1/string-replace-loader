@@ -166,6 +166,30 @@ describe('Webpack replace loader ...', () => {
     )
   })
 
+  it('should replace when using callback', done => {
+    webpack(getTestWebPackConfig(
+      {
+        test: /\.js$/,
+        loader: '__this-loader',
+        options: {
+          search: 'var value',
+          replace: () => ('var a')
+        }
+      }),
+      (error, stats) => {
+        expect(error).to.equal(null)
+
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a')
+          done()
+        })
+      }
+    )
+  })
+
   it('should not throw error when cannot replace in single mode', done => {
     webpack(getTestWebPackConfig(
       {
