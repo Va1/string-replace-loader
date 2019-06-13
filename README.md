@@ -94,7 +94,7 @@ module.exports = {
 }
 ```
 
-### Replacement with callback
+### Callback replacement
 
 You can specify a callback function to have dynamic replacement values.
 
@@ -110,10 +110,8 @@ module.exports = {
         loader: 'string-replace-loader',
         options: {
           search: '^Hello, (.*)!$',
-          replace: function(match, p1, offset, string){
-            return 'Bonjour, ' + p1.toUpperCase() + '!!!';
-          },
-          flags: 'gi'
+          replace: (match, p1, offset, string) => `Bonjour, ${p1.toUpperCase()}!`,
+          flags: 'g'
         }
       }
     ]

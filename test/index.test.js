@@ -55,9 +55,9 @@ describe('Webpack replace loader ...', () => {
         test: /\.js$/,
         loader: '__this-loader',
         options: {
-          search: 'var VALUE = \'\.*\'',
-          replace: 'var a = \'\'',
-          flags: 'i'
+          search: `var VALUE = '.*'`,
+          replace: `var a = ''`,
+          flags: 'ig'
         }
       }),
       (error, stats) => {
@@ -67,7 +67,7 @@ describe('Webpack replace loader ...', () => {
           expect(error).to.equal(null)
           expect(contents).to.be.a('string')
           expect(contents).to.not.include('var value')
-          expect(contents).to.include('var a = \'\'')
+          expect(contents).to.include(`var a = ''`)
           done()
         })
       }
@@ -101,6 +101,30 @@ describe('Webpack replace loader ...', () => {
           expect(contents).to.not.include('var value')
           expect(contents).to.include('var a')
           expect(contents).to.include('var bar')
+          done()
+        })
+      }
+    )
+  })
+
+  it('should replace with function replace', done => {
+    webpack(getTestWebPackConfig(
+      {
+        test: /\.js$/,
+        loader: '__this-loader',
+        options: {
+          search: `var value = '(baz)'`,
+          replace: (match, p1, offset, string) => `var a = '${p1.toUpperCase()}'`,
+          flags: 'g'
+        }
+      }),
+      (error, stats) => {
+        expect(error).to.equal(null)
+
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.include(`var a = 'BAZ'`)
           done()
         })
       }
