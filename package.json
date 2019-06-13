@@ -15,8 +15,8 @@
   },
   "main": "index.js",
   "dependencies": {
-    "loader-utils": "^1.1.0",
-    "schema-utils": "^0.4.5"
+    "loader-utils": "^1.2.3",
+    "schema-utils": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
