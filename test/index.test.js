@@ -317,4 +317,30 @@ describe('Webpack replace loader ...', () => {
       }
     )
   })
+
+  it('should get context when replace is a function', done => {
+    webpack(getTestWebPackConfig(
+      {
+        test: /\.js$/,
+        loader: '__this-loader',
+        options: {
+          search: 'var value',
+          replace() {
+            return `var a /* ${Object.prototype.toString.call(this.callback)} */`
+          }
+        }
+      }),
+      (error, stats) => {
+        expect(error).to.equal(null)
+
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include('var a /* [object Function] */')
+          done()
+        })
+      }
+    )
+  })
 })
