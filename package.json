@@ -1,6 +1,6 @@
 {
   "name": "chars-replace-loader",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
