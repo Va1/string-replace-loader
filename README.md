@@ -119,6 +119,28 @@ module.exports = {
 }
 ``` 
 
+```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: '^Hello, (.*)!$',
+          replace(match, p1, offset, string) {
+            console.log(this); // 'this' equal to loader context
+            return `Bonjour, ${p1.toUpperCase()}!`;
+          },
+          flags: 'g'
+        }
+      }
+    ]
+  }
+}
+``` 
+
 ### Strict mode replacement:
 
 You can enable strict mode to ensure that the replacement was performed.
