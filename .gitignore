@@ -4,4 +4,5 @@
 *.swp
 node_modules/*
 !node_modules/__this-loader/
+package-lock.json
 test/build/
