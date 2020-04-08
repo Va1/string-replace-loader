@@ -49,7 +49,7 @@ describe('Webpack replace loader ...', () => {
     )
   })
 
-  it('should replace with pattern search', done => {
+  it('should replace with pattern search defined as string', done => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
@@ -58,6 +58,30 @@ describe('Webpack replace loader ...', () => {
           search: `var VALUE = '.*'`,
           replace: `var a = ''`,
           flags: 'ig'
+        }
+      }),
+      (error, stats) => {
+        expect(error).to.equal(null)
+
+        fs.readFile(outputFilePath, 'utf8', (error, contents) => {
+          expect(error).to.equal(null)
+          expect(contents).to.be.a('string')
+          expect(contents).to.not.include('var value')
+          expect(contents).to.include(`var a = ''`)
+          done()
+        })
+      }
+    )
+  })
+
+  it('should replace with pattern search as RegExp', done => {
+    webpack(getTestWebPackConfig(
+      {
+        test: /\.js$/,
+        loader: '__this-loader',
+        options: {
+          search: /var VALUE = '.*'/ig,
+          replace: `var a = ''`
         }
       }),
       (error, stats) => {

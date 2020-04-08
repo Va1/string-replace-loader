@@ -9,7 +9,7 @@ $ npm install --save-dev string-replace-loader
 ```
 
 With release of 2.0.0 the loader is expected to be used in Node v4+ environment.
-Support for Node v3 and lower was dropped, but you can install and use the loader version of 1.3.0 in older environments. 
+Support for Node v3 and lower was dropped, but you can install and use the loader version of 1.3.0 in older environments.
 
 ## Usage:
 
@@ -42,13 +42,33 @@ module.exports = {
 
 ### RegEx replacement:
 
-To achieve regular expression replacement you should specify the `flags` option
-(as an empty string if you do not want any flags). In this case, `search` and `flags` are being
-passed to the [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) constructor
+To achieve regular expression replacement you should either specify the `search` option as
+[RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) instance,
+either specify it as string and add the `flags` option (as an empty string if you do not want any flags).
+In the latter case, `search` and `flags` are being passed to the
+[RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) constructor
 and this means that you should escape RegEx special characters in `search` if you want it to be replaced as a string.
 
 In your `webpack.config.js`:
 
+```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /fileInWhichJQueryIsUndefined\.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: /\$/i,
+          replace: 'window.jQuery'
+        }
+      }
+    ]
+  }
+}
+```
+or
 ```javascript
 module.exports = {
   // ...
@@ -117,7 +137,7 @@ module.exports = {
     ]
   }
 }
-``` 
+```
 
 ### Strict mode replacement:
 
