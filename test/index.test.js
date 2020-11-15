@@ -11,6 +11,7 @@ const outputFilePath = path.join(outputDirPath, outputFileName)
 function getTestWebPackConfig(loaderConfig) {
   return {
     mode: 'development',
+    devtool: false,
     entry: entryFilePath,
     output: {
       path: outputDirPath,
@@ -193,9 +194,21 @@ describe('Webpack replace loader ...', () => {
     webpack(getTestWebPackConfig(
       {
         test: /\.js$/,
-        loaders: [
-          '__this-loader?search=var value&replace=var a',
-          '__this-loader?search=module.exports = value&replace=module.exports = a'
+        use: [
+          {
+            loader: '__this-loader',
+            options: {
+              search: 'var value',
+              replace: 'var a'
+            }
+          },
+          {
+            loader: '__this-loader',
+            options: {
+              search: 'module.exports = value',
+              replace: 'module.exports = a'
+            }
+          }
         ]
       }),
       (error, stats) => {

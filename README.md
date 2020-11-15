@@ -5,11 +5,14 @@ Perform replacements (plain and regular expression) in the contents loaded by th
 ## Install:
 
 ```bash
-$ npm install --save-dev string-replace-loader
+$ yarn add --dev string-replace-loader
 ```
 
 With release of 2.0.0 the loader is expected to be used in Node v4+ environment.
 Support for Node v3 and lower was dropped, but you can install and use the loader version of 1.3.0 in older environments.
+
+With release of 3.0.0 the loader is expected to be used with Webpack v5+.
+Support for Webpack v4 and lower was dropped, but you can install and use the loader version of 2.3.0 in older environments.
 
 ## Usage:
 
