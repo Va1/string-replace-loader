@@ -133,7 +133,10 @@ module.exports = {
         loader: 'string-replace-loader',
         options: {
           search: '^Hello, (.*)!$',
-          replace: (match, p1, offset, string) => `Bonjour, ${p1.toUpperCase()}!`,
+          replace(match, p1, offset, string) {
+            console.log(`Replace "${match}" in file "${this.resource}".`)
+            return `Bonjour, ${p1.toUpperCase()}!`
+          },
           flags: 'g'
         }
       }
