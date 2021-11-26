@@ -120,6 +120,7 @@ module.exports = {
 ### Callback replacement
 
 You can specify a callback function to have dynamic replacement values.
+The context of this function will be the context of the loader.
 
 In your `webpack.config.js`:
 
