@@ -1,6 +1,6 @@
 {
   "name": "string-replace-loader",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Replace loader for Webpack",
   "keywords": [
     "webpack",
@@ -15,16 +15,21 @@
   },
   "main": "index.js",
   "dependencies": {
-    "loader-utils": "^2.0.0",
-    "schema-utils": "^3.0.0"
+    "schema-utils": "^4"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.2.0",
-    "webpack": "^5.3.0"
+    "chai": "^5",
+    "husky": "^9",
+    "lint-staged": "^15",
+    "mocha": "^11",
+    "standard": "^17",
+    "webpack": "^5"
   },
   "peerDependencies": {
     "webpack": "^5"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "repository": {
     "type": "git",
@@ -33,5 +38,21 @@
   "homepage": "https://github.com/Va1/string-replace-loader",
   "author": "Valentyn Barmashyn <barmashyn.val@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "lint-staged": {
+    "index.js": [
+      "standard --fix"
+    ],
+    "lib/**/*.js": [
+      "standard --fix"
+    ],
+    "test/**/*.js": [
+      "standard --fix --env mocha"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
