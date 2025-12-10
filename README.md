@@ -63,7 +63,7 @@ module.exports = {
         test: /fileInWhichJQueryIsUndefined\.js$/,
         loader: 'string-replace-loader',
         options: {
-          search: /\$/i,
+          search: /\\$/i,
           replace: 'window.jQuery'
         }
       }
@@ -81,7 +81,7 @@ module.exports = {
         test: /fileInWhichJQueryIsUndefined\.js$/,
         loader: 'string-replace-loader',
         options: {
-          search: '\$',
+          search: '\\$',
           replace: 'window.jQuery',
           flags: 'i'
         }
